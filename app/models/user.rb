@@ -7,7 +7,7 @@ class User < ApplicationRecord
   
   has_secure_password
   
-  ALID_PASSWD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.^*()%!~]).{8,}$/
+  VALID_PASSWD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.^*()%!~]).{8,}$/
   validates :password, presence: true,
                       format: { with: VALID_PASSWD_REGEX, :message => 
                       "must contains at least a lowercase letter, a uppercase,

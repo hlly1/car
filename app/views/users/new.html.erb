@@ -1,2 +1,9 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, 'Sign up') %>
+<% provide(:button_text, 'Rigister') %>
+<div class="jumbotron text-center">
+  <h1>Create your Account</h1>
+  <div>
+      <%= render 'form' %>
+  </div>
+</div>
+<br><br>
