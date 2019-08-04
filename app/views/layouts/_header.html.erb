@@ -1,18 +1,27 @@
-<header class="navbar bg-dark">
-
-  <div class="container">
-    <%= link_to "CarSharingSite", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home",   root_path %></li>
-          <% if logged_in? %>
-            <li><%= link_to current_user.name, user_url(current_user.id) %>
-                , <%= link_to "Log out", logout_path, :method => :delete %>
-            </li>
-          <% else %>
-            <li><%= link_to "Log in", login_path %></li>
-          <% end %>
-      </ul>
-    </nav>
+<header>
+  
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to "MOCAR", root_path, id: "logo" %>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav navbar-right">
+      <li>
+        <%= link_to "Home", root_path, :class => "nav-link" %>
+      </li>
+      <% if logged_in? %>
+      <%= link_to current_user.name, user_url(current_user.id), :class => "nav-link" %>
+      <%= link_to "Logout", logout_path, :method => :delete ,:class => "nav-link" %>
+      <% else %>
+      <li>
+        <%= link_to "Login", login_path, :class => "nav-link" %>
+      </li>
+      <% end %>
+    </ul>
   </div>
+</nav>  
+</div>
+  
+  
+  
+
 </header>
