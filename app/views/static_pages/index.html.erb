@@ -5,26 +5,9 @@
 <h3>Your location is currently shown on the map,
 choose the cloest part to get start.
 </h3>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div id="map"></div>
+  
+  <%= render 'map' %>
   <%= link_to "Find a car at the nearest location.", '#', class: "btn btn-info" %>
+  <%= link_to "Car list sorted by Locations", locations_url, class: "btn btn-info" %>
 </div>

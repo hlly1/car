@@ -5,6 +5,7 @@ class StaticPagesController < ApplicationController
   end
   
   def index
+    @locations = Location.all
   end
   
   
