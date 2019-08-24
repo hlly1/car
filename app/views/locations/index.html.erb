@@ -5,9 +5,10 @@
 <% @locations.each do |location| %>
   Name: <%= location.name %>, latitude: <%= location.latitude %>, longitude: <%= location.longitude %><br>
   <% location.vehicles.each do |vehicle| %>
-    <li><%= vehicle.name %></li>
+    <li><%= link_to vehicle.name, vehicle %></li>
     <li><%= vehicle.detail %></li>
     <li>$<%= vehicle.price %></li>
+    <li><%= link_to "delete this vehicle", vehicle, method: :delete, data: { confirm: "Are you sure to delete?" } %></li>
     <p>-------------------------------------</p>
   <% end %>
 <% end %>

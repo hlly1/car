@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_action :redirect, only: [:home]
+  # before_action :redirect, only: [:home]
   
   def home
   end
