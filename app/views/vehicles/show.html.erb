@@ -1,0 +1,12 @@
+<% provide(:title, @vehicle.name) %>
+<h1>
+  <%= @vehicle.name %>
+</h1><br>
+<h3>
+  Description of this vehicle:
+</h3>
+<p><%= @vehicle.detail %></p>
+
+<%= link_to "Book this vehicle", "#", class: "btn btn-info" %>
+<%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info" %>
+
