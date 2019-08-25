@@ -12,4 +12,30 @@
   font-size: 18px;
 }
 
+form {
+  height: 350px;
+}
 
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  float: left;
+  clear: both;
+  margin-left: 30%;
+  margin-top: 20px;
+}
+
+.form-control {
+  float: left;
+  clear: both;
+  display: block;
+  width: 40%;
+  margin-left: 30%;
+}
+
+.btn-success {
+  float: left;
+  clear: both;
+  margin-left: 46%;
+  margin-top: 20px;
+}
