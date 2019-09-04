@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: 2019-09-02 09:20:31
+  end: 2019-09-02 09:20:31
+  user: one
+  vehicle: one
+  location: one
+
+two:
+  start: 2019-09-02 09:20:31
+  end: 2019-09-02 09:20:31
+  user: two
+  vehicle: two
+  location: two

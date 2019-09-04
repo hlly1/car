@@ -1,13 +1,32 @@
 <% provide(:title, 'MoCar') %>
 
-<div class="jumbotron text-center">
-  <h1>Welcome to use MoCar!</h1>
-<h3>Your location is currently shown on the map,
+<div class="text-center">
+  
+  
+<h1>Welcome to use MoCar!</h1>
+<p class = "text-muted">Your location is currently shown on the map,
 choose the cloest part to get start.
-</h3>
+</p><br>
+<div class = "row" >
+
+<div class = "col-sm-3"></div>
+<div class = "col-sm-6">
+  
 <div id="map"></div>
+<br><br>
   
   <%= render 'map' %>
-  <%= link_to "Find a car at the nearest location.", '#', class: "btn btn-info" %>
+  <%= link_to "Find a car at the nearest location.", '#', class: "btn btn-info" %><br><br>
   <%= link_to "Car list sorted by Locations", locations_url, class: "btn btn-info" %>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
 </div>

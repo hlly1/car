@@ -1,10 +1,98 @@
 <script>
-function initMap() {
-  var pos = {lat: -37.8098, lng: 144.9652};
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 13, center: pos});  
-  var marker = new google.maps.Marker({position: pos, map: map});
-}
+
+  x = navigator.geolocation;
+  x.getCurrentPosition(success, failure);
+  
+  
+  function success(position){
+    
+    var userLat = position.coords.latitude;
+    var userLong = position.coords.longitude;
+    
+    var coords = new google.maps.LatLng(userLat,userLong);
+    
+    var mapOptions = {
+      zoom: 11,
+      center: coords,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+    
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var user = new google.maps.Marker({map:map, draggable: true, animation: google.maps.Animation.DROP, position:coords})
+    user.addListener('click', toggleBounce);
+    
+    
+    var image = {
+      url: 'https://image.flaticon.com/icons/svg/62/62820.svg', 
+      scaledSize: new google.maps.Size(30, 30)
+    };
+    
+    var stateLibary = new google.maps.Marker({
+      position: {lat: -37.809800, lng: 144.965200},
+      map: map,
+      icon: image,
+      url: 'locations/1'
+    });
+    
+    google.maps.event.addListener(stateLibary, 'click', function() {
+        window.location.href = this.url;
+    });
+    
+    
+    var flinderS = new google.maps.Marker({
+      position: {lat: -37.818300, lng: 144.967100},
+      map: map,
+      icon: image,
+      url: 'locations/2'
+    });
+    
+    google.maps.event.addListener(flinderS, 'click', function() {
+        window.location.href = this.url;
+    }); 
+    
+    var melCentral = new google.maps.Marker({
+      position: {lat: -37.810200, lng: 144.962800},
+      map: map,
+      icon: image,
+      url: 'locations/3'
+    });
+    
+    google.maps.event.addListener(melCentral, 'click', function() {
+        window.location.href = this.url;
+    });  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    function toggleBounce() {
+      if (user.getAnimation() !== null) {
+        user.setAnimation(null);
+      } else {
+        user.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    
+    
+  }
+  
+  function failure(){}
+  
+    
+    
+    
+    
+
+
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&callback=initMap">

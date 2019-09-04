@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'orders/new'
+
   root 'static_pages#index'
   get    '/signup',  to: 'users#new'
   get    '/addvehicle' ,to: 'vehicles#new'
