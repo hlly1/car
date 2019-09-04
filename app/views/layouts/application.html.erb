@@ -6,8 +6,8 @@
   </head>
   <body>
 <%= render 'layouts/header' %>
-    <div class="container jumbotron">
-      
+    
+      <div class="container">
       <!--Adding 'close' to flash notice-->
       
       <% flash.each do |message_type, message| %>
@@ -22,7 +22,8 @@
           <%= message %>
         <% end %>
       <% end %>
-
+    </div>
+    <div class="container jumbotron">
       
       <%= yield %>
 

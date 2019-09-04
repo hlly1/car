@@ -2,13 +2,13 @@
   <%= render 'shared/error_messages', object: @user %>
 
   <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.text_field :name, class: 'form-control' %><br><br>
 
   <%= f.label :email %>
-  <%= f.text_field :email, class: 'form-control' %>
+  <%= f.text_field :email, class: 'form-control' %><br><br>
 
   <%= f.label :password %>
-  <%= f.password_field :password, class: 'form-control' %>
+  <%= f.password_field :password, class: 'form-control' %><br><br>
   
   <%= f.submit yield(:button_text), class: "btn btn-info" %>
 <% end %>

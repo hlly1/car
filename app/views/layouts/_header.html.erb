@@ -8,6 +8,7 @@
         <%= link_to "Home", root_path, :class => "btn btn-success btn-sm" %>
       </li>
       <% if logged_in? %>
+      &nbsp&nbsp&nbsp&nbsp&nbsp
       <%= link_to current_user.name, user_url(current_user.id), :class => "btn btn-success btn-sm" %>
       &nbsp&nbsp&nbsp&nbsp&nbsp
       <%= link_to "Logout", logout_path, :method => :delete ,:class => "btn btn-success btn-sm" %>
