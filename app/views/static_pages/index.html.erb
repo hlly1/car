@@ -5,7 +5,7 @@
   
 <h1>Welcome to use MoCar!</h1>
 <p class = "text-muted">Your location is currently shown on the map,
-choose the cloest part to get start.
+choose a parking to get start.
 </p><br>
 <div class = "row" >
 
@@ -16,7 +16,16 @@ choose the cloest part to get start.
 <br><br>
   
   <%= render 'map' %>
-  <%= link_to "Find a car at the nearest location.", '#', class: "btn btn-info" %><br><br>
+  
+  
+<%= form_tag("/autoFind", method: "POST") do %>
+    <%= hidden_field_tag :userLat %>
+    <%= hidden_field_tag :userLng %>
+    <%= submit_tag "Find a car at the nearest location.", class: "btn btn-info" %>
+<% end %>
+
+
+  
   <%= link_to "Car list sorted by Locations", locations_url, class: "btn btn-info" %>
 </div>
 

@@ -1,20 +1,24 @@
 <script>
-
+function initMap(){
   x = navigator.geolocation;
   x.getCurrentPosition(success, failure);
-  
-  
+
   function success(position){
+    var userLat, userLong;
+    userLat = position.coords.latitude;
+    userLong = position.coords.longitude;
     
-    var userLat = position.coords.latitude;
-    var userLong = position.coords.longitude;
-    
+
+        
     var coords = new google.maps.LatLng(userLat,userLong);
+    
+    document.getElementById("userLat").value = userLat;
+    document.getElementById("userLng").value = userLong;
     
     var mapOptions = {
       zoom: 11,
       center: coords,
-      mapTypeId: google.maps.MapTypeId.TERRAIN
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -54,24 +58,12 @@
       position: {lat: -37.810200, lng: 144.962800},
       map: map,
       icon: image,
-      url: 'locations/3'
+      url: 'locations/2'
     });
     
     google.maps.event.addListener(melCentral, 'click', function() {
         window.location.href = this.url;
     });  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     function toggleBounce() {
@@ -85,15 +77,14 @@
     
   }
   
-  function failure(){}
+  function failure(){
+    alert('Google Map has some problem!');
+  }
   
-    
+}
     
     
     
 
 
-</script>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&callback=initMap">
 </script>
