@@ -1,2 +1,38 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<% provide(:title, 'Sign up') %>
+<% provide(:button_text, 'Make a Order') %>
+<div class="text-center">
+  <h1>Choose start time and return time</h1><br><br>
+  
+  <div class = "row"><div class = "col-sm-3"></div>
+  <div class = "col-sm-6">
+    
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      Please correct the following errors:<br><br>
+      <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+  <%= f.label :start %>
+  <%= f.datetime_select :start, :ampm => true, :minute_step => 15, class: 'form-control' %><br><br>
+
+  <%= f.label :end %>
+  <%= f.datetime_select :end, :ampm => true, :minute_step => 15, class: 'form-control' %><br><br>
+
+  <!--<br><br>-->
+  
+  <%= f.submit yield(:button_text), class: "btn btn-info" %>
+<% end %>
+
+  </div>
+  </div>
+
+</div>
+<br><br>

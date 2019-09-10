@@ -2,9 +2,9 @@
 <h1>
   <%= @user.name %>
 </h1><br>
-
+<% if @user.isadmin == 1 %>
 <%= link_to "add a new vehicle", addvehicle_path, class: "btn btn-info" %>
-
+<% end %>
 <h3>
     My Transactions:
 </h3>
