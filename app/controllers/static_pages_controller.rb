@@ -5,7 +5,8 @@ class StaticPagesController < ApplicationController
   end
   
   def index
-    @locations = Location.all
+    gon.locations = Location.all
+    gon.vehicles = Vehicle.all
   end
   
   def autoFind

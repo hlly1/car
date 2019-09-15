@@ -1,7 +1,5 @@
 <script>
 
-
-
 function initMap(){
   x = navigator.geolocation;
   x.getCurrentPosition(success, failure);
@@ -28,43 +26,71 @@ function initMap(){
     
     
     var image = {
-      url: 'https://image.flaticon.com/icons/svg/62/62820.svg', 
+      url: 'https://lh3.googleusercontent.com/qib447aK25hGM1wSNa6xPEa4qiPJX0Dqa8CHCltVhi_ETjGeZdSYaY6GMAiLT4QOsaA', 
       scaledSize: new google.maps.Size(30, 30)
     };
     
-    var stateLibary = new google.maps.Marker({
-      position: {lat: -37.809800, lng: 144.965200},
-      map: map,
-      icon: image,
-      url: 'locations/1'
-    });
+    //console.log(gon.vehicles[0].location_id);
     
-    google.maps.event.addListener(stateLibary, 'click', function() {
-        window.location.href = this.url;
-    });
+    var arr = [];
+    for (var i = 0; i < gon.vehicles.length; i++) {
+      for(var j = 0; j < gon.locations.length; j++){
+        
+        if(gon.vehicles[i].location_id == gon.locations[j].id){
+            // console.log(parseFloat(gon.locations[j].latitude));
+            arr.push(
+                new google.maps.Marker({
+                  position: {lat: parseFloat(gon.locations[j].latitude), lng: parseFloat(gon.locations[j].longitude)},
+                  map: map,
+                  icon: image,
+                  url: 'locations/'+gon.locations[j].id
+                })
+              );
+              
+          google.maps.event.addListener(arr[i], 'click', function() {
+              window.location.href = this.url;
+          });
+
+        }
+       
+        
+      }
+    }
     
     
-    var flinderS = new google.maps.Marker({
-      position: {lat: -37.818300, lng: 144.967100},
-      map: map,
-      icon: image,
-      url: 'locations/2'
-    });
+    // var stateLibary = new google.maps.Marker({
+    //   position: {lat: -37.809800, lng: 144.965200},
+    //   map: map,
+    //   icon: image,
+    //   url: 'locations/1'
+    // });
     
-    google.maps.event.addListener(flinderS, 'click', function() {
-        window.location.href = this.url;
-    }); 
+    // google.maps.event.addListener(stateLibary, 'click', function() {
+    //     window.location.href = this.url;
+    // });
     
-    var melCentral = new google.maps.Marker({
-      position: {lat: -37.810200, lng: 144.962800},
-      map: map,
-      icon: image,
-      url: 'locations/3'
-    });
     
-    google.maps.event.addListener(melCentral, 'click', function() {
-        window.location.href = this.url;
-    });  
+    // var flinderS = new google.maps.Marker({
+    //   position: {lat: -37.818300, lng: 144.967100},
+    //   map: map,
+    //   icon: image,
+    //   url: 'locations/2'
+    // });
+    
+    // google.maps.event.addListener(flinderS, 'click', function() {
+    //     window.location.href = this.url;
+    // }); 
+    
+    // var melCentral = new google.maps.Marker({
+    //   position: {lat: -37.810200, lng: 144.962800},
+    //   map: map,
+    //   icon: image,
+    //   url: 'locations/3'
+    // });
+    
+    // google.maps.event.addListener(melCentral, 'click', function() {
+    //     window.location.href = this.url;
+    // });  
     
     
     function toggleBounce() {
@@ -88,5 +114,5 @@ function initMap(){
     
     
 
-
+// google.maps.event.addDomListener(window, 'load', initialize);
 </script>

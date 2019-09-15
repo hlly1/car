@@ -13,6 +13,7 @@ gem 'jbuilder',     '2.7.0'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'font-awesome-rails'
+gem 'gon'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
