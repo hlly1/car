@@ -7,6 +7,6 @@
 </h3>
 <p><%= @vehicle.detail %></p>
 
-<%= link_to "Book this vehicle", "#", class: "btn btn-info" %>
+<%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info" %>
 <%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info" %>
 

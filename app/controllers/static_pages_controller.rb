@@ -1,12 +1,20 @@
 class StaticPagesController < ApplicationController
   # before_action :redirect, only: [:home]
-  
-  def home
+
+  def index
+    
   end
   
-  def index
+  def search
+    @input = params[:address]
+    results = Geocoder.search(@input)
+    
+    @dist = distance(results.first.coordinates[0], results.first.coordinates[1])
+
     gon.locations = Location.all
     gon.vehicles = Vehicle.all
+    
+    
   end
   
   def autoFind

@@ -1,0 +1,21 @@
+<h3>
+  <%= @order.aasm_state %>
+</h3>
+<div>
+  You Choose Car: <%= @order.vehicle.name %>
+</div>
+<div>
+  The Car Price: <%= @order.vehicle.price %>$/h
+</div>
+<div>
+  You Choose Time: <%= @order.start %>..<%= @order.end %>
+</div>
+<div>
+  Total Amount: <%= @order.price %>
+</div>
+<div style="padding-top: 20px">
+  <% unless @order.aasm_state.in? ["completed", "canceled"] %>
+    <%= link_to "Pay", pay_order_order_path(@order), method: :post, class: "btn btn-primary" %>
+    <%= link_to "Cancel", cancel_order_order_path(@order), method: :post, class: "btn btn-secondary" %>
+  <% end %>
+</div>

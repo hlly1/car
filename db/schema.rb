@@ -10,24 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190910045417) do
+ActiveRecord::Schema.define(version: 20190924091133) do
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.decimal "latitude"
-    t.decimal "longitude"
+    t.string "address"
+    t.integer "vehicle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_locations_on_vehicle_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
+    t.float "price"
+    t.integer "location_id"
     t.integer "user_id"
     t.integer "vehicle_id"
-    t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "aasm_state", limit: 100
     t.index ["location_id"], name: "index_orders_on_location_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["vehicle_id"], name: "index_orders_on_vehicle_id"
@@ -47,11 +49,10 @@ ActiveRecord::Schema.define(version: 20190910045417) do
     t.string "name"
     t.text "detail"
     t.float "price"
-    t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "statu", default: 1
-    t.index ["location_id"], name: "index_vehicles_on_location_id"
+    t.string "location"
   end
 
 end

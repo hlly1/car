@@ -1,0 +1,13 @@
+<% provide(:title, 'Result') %>
+
+
+<% Location.all.each do |location| %>
+<% if @dist > 300 %>
+<% result = Geocoder.search([48.856614, 2.3522219]) %>
+
+
+<% end %>
+
+<%= render 'map' %>
+
+<!--<div id="map"></div>-->

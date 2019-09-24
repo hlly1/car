@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  start: 2019-09-02 09:20:31
-  end: 2019-09-02 09:20:31
+  start: 2019-09-22 06:01:39
+  end: 2019-09-22 06:01:39
+  price: 1.5
+  location: one
   user: one
   vehicle: one
-  location: one
 
 two:
-  start: 2019-09-02 09:20:31
-  end: 2019-09-02 09:20:31
+  start: 2019-09-22 06:01:39
+  end: 2019-09-22 06:01:39
+  price: 1.5
+  location: two
   user: two
   vehicle: two
-  location: two

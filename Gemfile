@@ -12,8 +12,10 @@ gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.7.0'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'aasm'
 gem 'font-awesome-rails'
 gem 'gon'
+gem 'geocoder', '~> 1.5', '>= 1.5.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
