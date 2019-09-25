@@ -1,26 +1,39 @@
 <% provide(:title, @user.name) %>
+
+<div class = "row text-center"><div class = "col-sm-3"></div>
+<div class = "col-sm-6">
 <h1>
-  <%= @user.name %>
+  Welcome, <%= @user.name %>!
 </h1><br>
+
 <% if @user.isadmin == 1 %>
 <%= link_to "add a new vehicle", addvehicle_path, class: "btn btn-info" %>
 <% end %>
+
 <h3>
-    My Transactions:
-</h3>
-<div>
+    Booking Reports:
+</h3><br><br>
+
   <% Order.where(user_id: @user.id).each do |order| %>
-  <div>
-    <%= link_to order.vehicle.name, order_path(order) %>
+<div class="card shadow text-center">
     <% if order.aasm_state == "pending" %>
       <span class="badge badge-warning">Pending</span>
     <% elsif order.aasm_state == "completed" %>
-      <span class="badge badge-success">Finished</span>
+      <span class="badge badge-success">Completed</span>
     <% elsif order.aasm_state == "cancelled" %>
       <span class="badge badge-dark">Cancelled</span>
-    <% end %>
-    
-    
-  </div>
+    <% end %>  
+<br>
+
+  <h1 class="card-title">#.<%= link_to "#{order.id} Order", order_path(order) %> </h1><br>
+  <h5>Vehicle name: <%=  order.vehicle.name %><h5>
+  <h5>Pick up Date: <%= order.start %><h5>
+  <h5>Return Location: <%= order.location.address %><h5>
+  <h6 class = "text-muted">See more details about this order by clicking title<h6>
+
+</div><br>
   <% end %>
+
+
+</div>
 </div>
