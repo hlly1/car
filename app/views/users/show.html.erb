@@ -8,3 +8,11 @@
 <h3>
     My Transactions:
 </h3>
+<div>
+  <% Order.where(user_id: @user.id).each do |order| %>
+  <div>
+    <%= link_to order.vehicle.name, order_path(order) %>
+    <%= order.aasm_state %>
+  </div>
+  <% end %>
+</div>

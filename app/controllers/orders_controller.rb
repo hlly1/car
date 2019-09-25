@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :login_check, only: [:new]
+  before_action :login_check, only: [:new, :show]
   before_action :set_vehicle, only: [:new]
   before_action :set_order, only: [:show, :cancel_order, :pay_order]
-  
+
   def index
     #code
   end
@@ -12,6 +12,9 @@ class OrdersController < ApplicationController
   end
   
   def show
+    if params[:status] == "ok"
+      @order.update!(aasm_state: "completed")
+    end
   end
   
   def create
@@ -24,9 +27,7 @@ class OrdersController < ApplicationController
   end
   
   def pay_order
-    if @order.update(aasm_state: "completed")
-      redirect_to order_path(@order)
-    end
+    redirect_to @order.paypal_url(order_path(@order))
   end
   
   def cancel_order
