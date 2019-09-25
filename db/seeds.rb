@@ -7,15 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# Vehicle.create(
-#  [ 
-#   {name: 'Car1', detail: 'This is car1.', price:'89.99', location:'652/656 North Rd, Ormond VIC 3204' },
-#   {name: 'Car2', detail: 'This is car2.', price:'69.99', location: 'Ormond VIC 3204' },
-#   {name: 'Car3', detail: 'This is car3.', price:'59.99', location: '358 Koornang Rd, Carnegie VIC 3163' },
-#   {name: 'Car4', detail: 'This is car4.', price:'39.99', location: '328 Swanston St, Melbourne VIC 3000' },
-#   {name: 'Car5', detail: 'This is car5.', price:'99.99', location: '239 Elizabeth St, Melbourne VIC 3000' },
-#   {name: 'Car6', detail: 'This is car6.', price:'199.99', location: 'Flinders St, Melbourne VIC 3000' }
-# ])
+Vehicle.create(
+ [ 
+  {name: 'Car1', detail: 'This is car1.', price:'10.12', location:'652/656 North Rd, Ormond VIC 3204' },
+  {name: 'Car2', detail: 'This is car2.', price:'20.30', location: 'Ormond VIC 3204' },
+  {name: 'Car3', detail: 'This is car3.', price:'19.11', location: '358 Koornang Rd, Carnegie VIC 3163' },
+  {name: 'Car4', detail: 'This is car4.', price:'13.22', location: '328 Swanston St, Melbourne VIC 3000' },
+  {name: 'Car5', detail: 'This is car5.', price:'30.21', location: '239 Elizabeth St, Melbourne VIC 3000' },
+  {name: 'Car6', detail: 'This is car6.', price:'9.8', location: 'Flinders St, Melbourne VIC 3000' }
+])
 
 Location.create(
  [
