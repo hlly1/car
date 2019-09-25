@@ -14,6 +14,10 @@
     <br>
     <p><%= @vehicle.detail %></p>
     <br>
+    <p>USD: $<%= @vehicle.price %> per/h</p>
+    <br>
+    <p>Pick up Address: <%= @vehicle.location %></p>
+    <br>
      <div>
     <% if @vehicle.statu == 1 %>
       <%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info btn-max-width" %>
@@ -21,9 +25,10 @@
     <% else %>
       <a href="#" class="btn btn-danger btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Busy!</a>
     <% end %>
-    
-    <% if current_user.isadmin == 1 %>
-      <%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info btn-max-width" %>
+    <% if logged_in? %>
+      <% if current_user.isadmin == 1 %>
+        <%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info btn-max-width" %>
+      <% end %>
     <% end %>
     </div>
     <br><br>

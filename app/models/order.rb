@@ -14,10 +14,10 @@ class Order < ApplicationRecord
           cmd: "_xclick",
           upload: 1,
           return: "https://c2454f80df8645668fcd790fdc87b9b3.vfs.cloud9.us-east-2.amazonaws.com/#{return_path}?status=ok",
-          invoice: self.id,
+          invoice: self.id+Time.now.to_i,
           amount: self.price,
           item_name: "payment",
-          item_number: self.id,
+          item_number: self.id+Time.now.to_i,
           quantity: '1'
       }
     end
@@ -28,10 +28,10 @@ class Order < ApplicationRecord
           cmd: "_xclick",
           upload: 1,
           return: "https://pp1-mocar.herokuapp.com/#{return_path}?status=ok",
-          invoice: self.id,
+          invoice: self.id+Time.now.to_i,
           amount: self.price,
           item_name: "payment",
-          item_number: self.id,
+          item_number: self.id+Time.now.to_i,
           quantity: '1'
       }
     end
