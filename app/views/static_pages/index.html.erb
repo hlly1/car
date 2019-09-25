@@ -50,17 +50,16 @@
       <% Vehicle.all.each do |vehicle| %>
         <% results = Geocoder.search(vehicle.location) %>
         <% coordinate = results.first.coordinates %>
-        var stateLibary<%= vehicle.id %> = new google.maps.Marker({
+        var vehicle<%= vehicle.id %> = new google.maps.Marker({
           position: {lat: <%= coordinate.first.to_f %>, lng: <%= coordinate.second.to_f %>},
           map: map,
-          icon: image,
-          url: 'https://www.baidu.com'
+          icon: image
         });
         
         var infowindow<%= vehicle.id %> = new google.maps.InfoWindow({
         content: '<div id="content">'+
                 '<div id="siteNotice">'+
-                '</div>'+
+                '</div><%= image_tag("https://images.unsplash.com/photo-1539713904642-b4d144f769d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", size:"200") %>'+
                 '<h1 id="firstHeading" class="firstHeading"><%= link_to vehicle.name, vehicle_path(vehicle) %></h1>'+
                 '<div id="bodyContent">'+
                 '<p><b><%= vehicle.detail %></b></p>'+
@@ -70,28 +69,12 @@
                 '</div>'
         });
 
-        //用来监听点击事件，如果点击地图上图标，就会跳转。现在是只需要弹出信息框
-        google.maps.event.addListener(stateLibary<%= vehicle.id %>, 'click', function() {
-          infowindow<%= vehicle.id %>.open(map, stateLibary<%= vehicle.id %>);
+        
+        google.maps.event.addListener(vehicle<%= vehicle.id %>, 'click', function() {
+          infowindow<%= vehicle.id %>.open(map, vehicle<%= vehicle.id %>);
         });
       <% end %>
-      
-      // var flinderS = new google.maps.Marker({
-      //   position: {lat: -37.818300, lng: 144.967100},
-      //   map: map,
-      //   icon: image,
-      //   url: 'locations/2'
-      // });
-      
-      // //用来监听点击事件，如果点击地图上图标，就会跳转。现在是只需要弹出信息框（待完成）
-      // google.maps.event.addListener(stateLibary, 'click', function() {
-      //     window.location.href = this.url;
-      // });
-      // //地图上点进去会报错，因为这个模型已经删掉了，报错是正常，这里就只是演示一下事件监听
-      // google.maps.event.addListener(flinderS, 'click', function() {
-      //     window.location.href = this.url;
-      // });
-      
+   
 //------------------------------------------------------------------------------
       var autocomplete = new google.maps.places.Autocomplete(input);
 

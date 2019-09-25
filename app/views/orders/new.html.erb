@@ -19,10 +19,10 @@
   <%= f.text_field :vehicle_name, value: @vehicle&.name, class: 'form-control', disabled: true %></br>
   
   <%= f.label :From %>
-  <%= f.datetime_select :start, :ampm => true, :minute_step => 15, class: 'form-control' %><br><br>
+  <%= f.datetime_select :start, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
 
   <%= f.label :To %>
-  <%= f.datetime_select :end, :ampm => true, :minute_step => 15, class: 'form-control' %><br><br>
+  <%= f.datetime_select :end, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
 
   <label>Return To:</label>
   <%= f.collection_select(:location_id, Location.all, :id, :address, 

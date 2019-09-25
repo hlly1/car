@@ -12,7 +12,15 @@
   <% Order.where(user_id: @user.id).each do |order| %>
   <div>
     <%= link_to order.vehicle.name, order_path(order) %>
-    <%= order.aasm_state %>
+    <% if order.aasm_state == "pending" %>
+      <span class="badge badge-warning">Pending</span>
+    <% elsif order.aasm_state == "completed" %>
+      <span class="badge badge-success">Finished</span>
+    <% elsif order.aasm_state == "cancelled" %>
+      <span class="badge badge-dark">Cancelled</span>
+    <% end %>
+    
+    
   </div>
   <% end %>
 </div>

@@ -1,12 +1,32 @@
 <% provide(:title, @vehicle.name) %>
-<h1>
-  <%= @vehicle.name %>
-</h1><br>
-<h3>
-  Description of this vehicle:
-</h3>
-<p><%= @vehicle.detail %></p>
 
-<%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info" %>
-<%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info" %>
-
+<div class = "row text-center"><div class = "col-sm-3"></div>
+<div class = "col-sm-6">
+<div class="card shadow text-center">
+    <br><br><h1 class="card-title"><%= @vehicle.name %></h1><br>
+    <div>
+      <%= image_tag("https://images.unsplash.com/photo-1523676060187-f55189a71f5e?ixlib=rb-1.2.1&w=1000&q=80", size:"200") %>
+    </div>
+    <br><br>
+    <h2>
+      Description of this vehicle:
+    </h2>
+    <br>
+    <p><%= @vehicle.detail %></p>
+    <br>
+     <div>
+    <% if @vehicle.statu == 1 %>
+      <%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info btn-max-width" %>
+      
+    <% else %>
+      <a href="#" class="btn btn-danger btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Busy!</a>
+    <% end %>
+    
+    <% if current_user.isadmin == 1 %>
+      <%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info btn-max-width" %>
+    <% end %>
+    </div>
+    <br><br>
+</div>
+</div>
+</div>

@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
   def show
     if params[:status] == "ok"
       @order.update!(aasm_state: "completed")
+      
     end
   end
   
@@ -21,7 +22,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     if @order.save
       flash[:success] = "Congratulations, your order is made!"
-      @order.update!(aasm_state: "awaiting_payment")
+      @order.update!(aasm_state: "pending")
+      @order.vehicle.update!(statu: 0)
       redirect_to @order
     end
   end
@@ -31,7 +33,8 @@ class OrdersController < ApplicationController
   end
   
   def cancel_order
-    if @order.update(aasm_state: "canceled")
+    if @order.update(aasm_state: "cancelled")
+      @order.vehicle.update!(statu: 1)
       redirect_to order_path(@order)
     end
   end

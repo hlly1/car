@@ -1,21 +1,52 @@
+
+<div class = "row text-center"><div class = "col-sm-3"></div>
+<div class = "col-sm-6">
+<div class="card shadow text-center">
+<br>
 <h3>
-  <%= @order.aasm_state %>
+  #.<%= @order.id %> Order
 </h3>
-<div>
-  You Choose Car: <%= @order.vehicle.name %>
-</div>
-<div>
-  The Car Price: <%= @order.vehicle.price %>$/h
-</div>
-<div>
-  You Choose Time: <%= @order.start %>..<%= @order.end %>
-</div>
-<div>
-  Total Amount: <%= @order.price %>
-</div>
-<div style="padding-top: 20px">
-  <% unless @order.aasm_state.in? ["completed", "canceled"] %>
-    <%= link_to "Pay", pay_order_order_path(@order), method: :post, class: "btn btn-primary" %>
-    <%= link_to "Cancel", cancel_order_order_path(@order), method: :post, class: "btn btn-secondary" %>
+<br>
+
+<div class="card-header"><h6>Owner:</h6></div>
+<ul class="list-group list-group-flush">
+   <li class="list-group-item"><%= @order.user.name %></li>
+</ul>
+
+<div class="card-header">Vehicle Booked:</div>
+<ul class="list-group list-group-flush">
+   <li class="list-group-item"><%= @order.vehicle.name %></li>
+</ul>
+
+<div class="card-header">Vehicle Price:</div>
+<ul class="list-group list-group-flush">
+   <li class="list-group-item"><%= @order.vehicle.price %> USD$/h</li>
+</ul>
+
+<div class="card-header">Pick up and Return Time:</div>
+<ul class="list-group list-group-flush">
+   <li class="list-group-item">From  (<%= @order.start %>)  to  (<%= @order.end %>)</li>
+</ul>
+
+<div class="card-header">Total Amount:</div>
+<ul class="list-group list-group-flush">
+   <li class="list-group-item">USD$ <%= @order.price %></li>
+</ul>
+
+<li class="list-group-item">
+
+  <% if @order.aasm_state == "pending" %>
+    <%= link_to "Pay", pay_order_order_path(@order), method: :post, class: "btn btn-primary btn-midSize" %>&nbsp&nbsp&nbsp
+    <%= link_to "Cancel", cancel_order_order_path(@order), method: :post, class: "btn btn-danger btn-midSize" %>
+  <% elsif @order.aasm_state == "completed" %>
+    <a href="#" class="btn btn-success btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Completed!</a>
+  <% elsif @order.aasm_state == "cancelled" %>
+    <a href="#" class="btn btn-dark btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Cancelled</a>
   <% end %>
+   
+</li>
+
+
+</div>
+</div>
 </div>
