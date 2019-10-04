@@ -1,18 +1,12 @@
 <%= form_for(@vehicle) do |f| %>
   <%= render 'error_messages', object: @vehicle %>
   
-  <% locations = [] %>
-  <% Location.order(:id).each do |location| %>
-    <% locations << location.name %>
-  <% end %>
-  
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control' %><br>
   
-  <label>Locations</label>
-  <%= f.collection_select(:location_id, Location.all, :id, :name, 
-  {:prompt => "Add/Update this vehicle to..."}, {:class => 'custom-select'})  %><br><br>
-      
+  <%= f.label :location %>
+  <%= f.text_field :location, class: 'form-control' %><br>
+  
   <%= f.label :detail %>
   <%= f.text_area :detail,class: 'form-control noresize', 
     size: '50x10' %><br><br>

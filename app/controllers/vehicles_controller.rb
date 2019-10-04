@@ -1,4 +1,5 @@
 class VehiclesController < ApplicationController
+  before_action :admin_maintain, only: [:edit, :update, :create, :new, :destroy]
   
   def show
     @vehicle = Vehicle.find(params[:id])
@@ -45,9 +46,21 @@ class VehiclesController < ApplicationController
   
   private
     def vel_params
-       params.require(:vehicle).permit(:name,:detail,:price,:location_id)
+       params.require(:vehicle).permit(:name,:detail,:price,:location)
     end
   
+    def admin_maintain
+      if logged_in?
+        if !(current_user.isadmin == 1)
+          flash[:danger] = "Warning: You don't have access!"
+          redirect_to root_path
+        end
+      else
+        flash[:danger] = "Please login first!"
+        redirect_to root_path
+      end
+    end
   
-  
+
+    
 end

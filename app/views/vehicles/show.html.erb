@@ -1,37 +1,60 @@
 <% provide(:title, @vehicle.name) %>
 
-<div class = "row text-center"><div class = "col-sm-3"></div>
+<div class = "row text-center">
+ 
+<div class = "col-sm-3">
+  <div class="card shadow">
+    <div class = "container">
+      <br>
+      <h3 class="card-title"><%= @vehicle.name %></h3>
+      <h6 class="card-subtitle mb-2 text-muted"><%= @vehicle.location %></h6><br>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h6>Vehicle Discription:</h6></li>
+      </ul>
+      <br>
+      <p class="card-text"><%= @vehicle.detail %></p>
+    </div>
+    <br>
+  </div>
+</div>
+
+
 <div class = "col-sm-6">
-<div class="card shadow text-center">
-    <br><br><h1 class="card-title"><%= @vehicle.name %></h1><br>
-    <div>
-      <%= image_tag("https://images.unsplash.com/photo-1523676060187-f55189a71f5e?ixlib=rb-1.2.1&w=1000&q=80", size:"200") %>
-    </div>
-    <br><br>
-    <h2>
-      Description of this vehicle:
-    </h2>
-    <br>
-    <p><%= @vehicle.detail %></p>
-    <br>
-    <p>USD: $<%= @vehicle.price %> per/h</p>
-    <br>
-    <p>Pick up Address: <%= @vehicle.location %></p>
-    <br>
-     <div>
-    <% if @vehicle.statu == 1 %>
-      <%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info btn-max-width" %>
+   <%= image_tag("https://images.unsplash.com/photo-1523676060187-f55189a71f5e?ixlib=rb-1.2.1&w=1000&q=80", class: "card-img-top img-radius shadow") %>
+</div>
+<div class = "col-sm-3">
+  <div class="card shadow">
+    <div class = "container">
+      <br>
+      <div class="border-bottom"><h3 class="card-title">More Details<br></h3></div>
+      <p class="card-text"><label>Price:</label>USD $<%= @vehicle.price %>/hour</p>
+      <p class="card-text">
+        <label>Status:</label>
+        <% if @vehicle.statu == 1 %>
+          Available
+        <% elsif @vehicle.statu == 0 %>
+          NOT available
+        <% end %>
+      </p>
       
-    <% else %>
-      <a href="#" class="btn btn-danger btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Busy!</a>
-    <% end %>
-    <% if logged_in? %>
-      <% if current_user.isadmin == 1 %>
-        <%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-info btn-max-width" %>
+      <% if @vehicle.statu == 1 %>
+        <%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info btn-max-width" %>
+      <% else %>
+        <a href="#" class="btn btn-danger btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Busy!</a>
       <% end %>
-    <% end %>
+      
+      <br><br>
+      <% if logged_in? %>
+        <% if current_user.isadmin == 1 %>
+          <label>Admin maintain: </label>
+          <%= link_to "Change this vehicle's details", edit_vehicle_url(@vehicle), class: "btn btn-warning btn-max-width" %>
+        <% end %>
+      <% end %>
     </div>
-    <br><br>
+    <br>
+  </div>
 </div>
+
+
 </div>
-</div>
+<br><br>

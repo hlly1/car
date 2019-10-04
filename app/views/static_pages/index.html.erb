@@ -15,7 +15,12 @@
     <h2 class="card-title text-center">Search vehicles by address:</h2>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <input id="inputLocation" type="text" placeholder="Search here..." class = "form-control">
+          <div class = "row">
+            <div class = "col-sm-10">
+              <input id="inputLocation" type="text" placeholder="Search here..." class = "form-control">
+            </div>
+            <button id="search" class = "btn btn-outline-primary">Search</button>
+          </div>
         </li>
         <% Vehicle.all.each do |vehicle| %>
           <li class="list-group-item">
