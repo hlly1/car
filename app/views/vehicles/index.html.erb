@@ -1,0 +1,34 @@
+<% provide(:title, "Vehicle Maintain") %>
+
+<div class = "row text-center"><div class = "col-sm-2"></div>
+<div class = "col-sm-8">
+<h1 class = "display-4">Vehicle Maintains</h1><br><br>
+<div class = "text-right">
+<%= link_to "add a new vehicle", addvehicle_path, class: "btn btn-success" %></div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Vehicle Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Address</th>
+      <th scope="col">Maintain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% Vehicle.all.each do |vehicle| %> 
+        <tr>
+          <th scope="row"><%= vehicle.id %></th>
+          <td><%= vehicle.name %></td>
+          <td>USD $<%= vehicle.price %>/h</td>
+          <td><%= vehicle.location %></td>
+          <td>
+              <%= link_to "Update", edit_vehicle_path(vehicle.id) %>
+              <%= link_to "Delete", vehicle, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

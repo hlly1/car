@@ -46,6 +46,15 @@
    
 </li>
 
+<li class="list-group-item">
+    <% if @order.aasm_state == "completed" %>
+        <%= link_to "Return Vehicle", return_car_order_path(@order), method: :post, class: "btn btn-primary" %>
+    <% elsif @order.aasm_state == "pending" %>
+        <a href="#" class="btn btn-danger btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">
+            You cannot pick/return the car until you finish the payment!
+        </a>
+    <% end %>
+</li>
 
 </div>
 </div>

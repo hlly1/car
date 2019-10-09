@@ -13,7 +13,7 @@ class Order < ApplicationRecord
           business: "dataerror0-facilitator@gmail.com",
           cmd: "_xclick",
           upload: 1,
-          return: "https://c2454f80df8645668fcd790fdc87b9b3.vfs.cloud9.us-east-2.amazonaws.com/#{return_path}?status=ok",
+          return: "https://1adb84741c054029b2ffbf5c0e0adf22.vfs.cloud9.us-east-2.amazonaws.com/#{return_path}?status=ok",
           invoice: self.id+Time.now.to_i,
           amount: self.price,
           item_name: "payment",

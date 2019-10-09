@@ -15,7 +15,7 @@ class VehiclesController < ApplicationController
     if @vehicle.save
       # Add new vehicle successfully
       flash[:success] = "New vehicle is added at that location!"
-      redirect_to locations_url
+      redirect_to @vehicle
     else
       render 'new'
     end

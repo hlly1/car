@@ -11,11 +11,12 @@ Rails.application.routes.draw do
   get    '/autoFind',to: 'static_pages#autoFind'
   post   '/autoFind',to: 'static_pages#autoFind'
   
-  resources :users, :vehicles, :locations
+  resources :users, :vehicles
   resources :orders do
     member do
       post 'cancel_order'
       post 'pay_order'
+      post 'return_car'
     end
   end
 end

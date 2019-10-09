@@ -1,42 +1,50 @@
-<%= form_for(@order) do |f| %>
+<% provide(:title, 'Order') %>
 
-  <% if @order.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      Please correct the following errors:<br><br>
-      <ul>
-        <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-        <% end %>
+<% provide(:title, @vehicle.name) %>
+
+<div class = "row text-center">
+ 
+<div class = "col-sm-3">
+  <div class="card shadow">
+    <div class = "container">
+      <br>
+      <h3 class="card-title"><%= @vehicle.name %></h3>
+      <h6 class="card-subtitle mb-2 text-muted"><%= @vehicle.location %></h6><br>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h6>Vehicle Discription:</h6></li>
       </ul>
+      <br>
+      <p class="card-text"><%= @vehicle.detail %></p>
     </div>
+    <br>
   </div>
-<% end %>
-  
-  <%= f.label :vehicle_id %>
-  <%= f.hidden_field :vehicle_id, value: @vehicle&.id %>
-  <%= f.hidden_field :user_id, value: session[:user_id] %>
-  <%= f.text_field :vehicle_name, value: @vehicle&.name, class: 'form-control', disabled: true %></br>
-  
-  <%= f.label :From %>
-  <%= f.datetime_select :start, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
-
-  <%= f.label :To %>
-  <%= f.datetime_select :end, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
-
-  <label>Return To:</label>
-  <%= f.collection_select(:location_id, Location.all, :id, :address, 
-  {:prompt => "Return vehicles to..."}, {:class => 'custom-select', required: true})  %><br><br>
-  
-  <%= f.submit 'Make an order', class: "btn btn-info" %>
-<% end %>
+</div>
 
 
-<script>
-  function test(){
-    var start = document.getElementById('start').value;
-    alert("start: "+start);
-  }
-  
-  
-</script>
+<div class = "col-sm-6">
+   <%= image_tag("https://images.unsplash.com/photo-1523676060187-f55189a71f5e?ixlib=rb-1.2.1&w=1000&q=80", class: "card-img-top img-radius shadow") %>
+</div>
+<div class = "col-sm-3">
+  <div class="card shadow">
+    <div class = "container">
+      <br>
+      <div class="border-bottom"><h3 class="card-title">More Details<br></h3></div>
+      <p class="card-text"><label>Price:</label>USD $<%= @vehicle.price %>/hour</p><br>
+      
+      <%= render 'form' %>
+      <br><br>
+    </div>
+    <br>
+  </div>
+</div>
+
+
+</div>
+<br><br>
+
+
+    
+
+
+
+

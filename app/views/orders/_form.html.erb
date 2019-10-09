@@ -1,0 +1,31 @@
+<%= form_for(@order) do |f| %>
+
+<% if @order.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      Please correct the following errors:<br><br>
+      <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+  
+  <%= f.hidden_field :vehicle_id, value: @vehicle&.id %>
+  <%= f.hidden_field :user_id, value: session[:user_id] %>
+
+  
+  <%= f.label :From %>
+  <%= f.datetime_select :start, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
+
+  <%= f.label :To %>
+  <%= f.datetime_select :end, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
+
+  <label>Return To:</label>
+  <%= f.collection_select(:location_id, Location.all, :id, :address, 
+  {:prompt => "Return vehicles to..."}, {:class => 'custom-select', required: true})  %><br><br>
+  
+  <%= f.submit 'Make an order', class: "btn btn-info" %>
+<% end %>

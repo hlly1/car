@@ -40,9 +40,14 @@
       }
 //-----------------------------------------------------------------------------
       var image = {
-        url: 'https://lh3.googleusercontent.com/qib447aK25hGM1wSNa6xPEa4qiPJX0Dqa8CHCltVhi_ETjGeZdSYaY6GMAiLT4QOsaA', 
+        url: 'https://icon-library.net/images/auto-icon/auto-icon-6.jpg', 
         scaledSize: new google.maps.Size(30, 30)
       };
+      
+      var busy = {
+        url: 'https://blogmedia.dealerfire.com/wp-content/uploads/sites/767/2017/03/car-red-200_b.png', 
+        scaledSize: new google.maps.Size(30, 30)
+      };   
       
       <% Vehicle.all.each do |vehicle| %>
         <% results = Geocoder.search(vehicle.location) %>
@@ -52,6 +57,10 @@
           map: map,
           icon: image
         });
+        
+        <% if vehicle.statu == 0 %>
+          vehicle<%= vehicle.id %>.setIcon(busy);
+        <% end %>
         
         var infowindow<%= vehicle.id %> = new google.maps.InfoWindow({
         content: '<div id="content">'+
@@ -69,6 +78,7 @@
         google.maps.event.addListener(vehicle<%= vehicle.id %>, 'click', function() {
           infowindow<%= vehicle.id %>.open(map, vehicle<%= vehicle.id %>);
         });
+        
       <% end %>
    
 //------------------------------------------------------------------------------
@@ -118,6 +128,5 @@
       infoWindow.open(map);
     }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=
-  AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&libraries=places&callback=initMap"
-      async defer></script>
+
+  <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&libraries=places&callback=initMap" async defer></script>

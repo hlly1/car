@@ -1,14 +1,26 @@
 <% provide(:title, @user.name) %>
 
-<div class = "row text-center"><div class = "col-sm-3"></div>
+<div class = "row text-center"><div class = "col-sm-3">
+  <div class = "card shadow text-center">
+    <br>
+    <h5 class = "card-title">Maintains</h5>
+    <p class = "card-body"><%= link_to "Update Profile", edit_user_path(@user), class: "btn btn-primary" %></p>
+    <% if @user.isadmin == 1 %>
+    <h5 class = "card-title">Admin Maintains</h5>
+      <p class = "card-body">
+        
+        <%= link_to "Maintains Users", users_path, class: "btn btn-success" %><br><br>
+        <%= link_to "Maintains Vehicles", vehicles_path, class: "btn btn-success" %>
+      </p>
+    <% end %>
+  </div>
+    
+</div>
+
 <div class = "col-sm-6">
 <h1>
   Welcome, <%= @user.name %>!
 </h1><br>
-
-<% if @user.isadmin == 1 %>
-<%= link_to "add a new vehicle", addvehicle_path, class: "btn btn-info" %>
-<% end %>
 
 <h3>
     Booking Reports:
