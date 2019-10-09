@@ -23,7 +23,7 @@
           <td>USD $<%= vehicle.price %>/h</td>
           <td><%= vehicle.location %></td>
           <td>
-              <%= link_to "Update", edit_vehicle_path(vehicle.id) %>
+              <%= link_to "Update", edit_vehicle_path(vehicle.id) %>&nbsp&nbsp&nbsp&nbsp
               <%= link_to "Delete", vehicle, method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>
         </tr>

@@ -1,0 +1,31 @@
+<% provide(:title, "Users Maintains") %>
+
+<div class = "row text-center"><div class = "col-sm-2"></div>
+<div class = "col-sm-8">
+<h1 class = "display-4">User Maintains</h1><br><br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Maintain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% User.all.each do |user| %> 
+        <tr>
+          <th scope="row"><%= user.id %></th>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          
+          <td>
+              <%= link_to "Update", edit_user_path(user.id) %>&nbsp&nbsp&nbsp&nbsp
+              <%= link_to "Delete", user, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

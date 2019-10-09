@@ -73,6 +73,7 @@ GEM
       railties (>= 3.2, < 6.1)
     formatador (0.2.5)
     geocoder (1.5.1)
+    gis-distance (1.0.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     gon (6.2.1)
@@ -235,6 +236,7 @@ DEPENDENCIES
   coffee-rails (= 4.2.2)
   font-awesome-rails
   geocoder (~> 1.5, >= 1.5.1)
+  gis-distance (~> 1.0, >= 1.0.2)
   gon
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)

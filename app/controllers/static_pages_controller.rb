@@ -2,6 +2,8 @@ class StaticPagesController < ApplicationController
   # before_action :redirect, only: [:home]
 
   def index
+    # @vehicle_near = []
+    
     
   end
   

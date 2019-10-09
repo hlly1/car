@@ -17,6 +17,7 @@ gem 'paypal_adaptive'
 gem 'font-awesome-rails'
 gem 'gon'
 gem 'geocoder', '~> 1.5', '>= 1.5.1'
+gem 'gis-distance', '~> 1.0', '>= 1.0.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

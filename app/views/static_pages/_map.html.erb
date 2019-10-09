@@ -1,4 +1,5 @@
   <script>
+  var carsArray = [];
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -33.8688, lng: 151.2195},
@@ -9,6 +10,8 @@
         url: 'https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-512.png', 
         scaledSize: new google.maps.Size(40, 40)
       };
+      
+      
       
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -25,20 +28,8 @@
             icon: userIcon,
             animation: google.maps.Animation.DROP
           })
-              
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-
-
-      var input = document.getElementById('inputLocation');
-      if(input == "" || input == null){
-         
-      }
-//-----------------------------------------------------------------------------
+          
+          //-----------------------------------------------------------------------------
       var image = {
         url: 'https://icon-library.net/images/auto-icon/auto-icon-6.jpg', 
         scaledSize: new google.maps.Size(30, 30)
@@ -49,39 +40,63 @@
         scaledSize: new google.maps.Size(30, 30)
       };   
       
+      var userx = position.coords.latitude;
+      var usery = position.coords.longitude;
+      var vcoordsx, vcoordsy, dist;
       <% Vehicle.all.each do |vehicle| %>
         <% results = Geocoder.search(vehicle.location) %>
         <% coordinate = results.first.coordinates %>
-        var vehicle<%= vehicle.id %> = new google.maps.Marker({
-          position: {lat: <%= coordinate.first.to_f %>, lng: <%= coordinate.second.to_f %>},
-          map: map,
-          icon: image
-        });
-        
-        <% if vehicle.statu == 0 %>
-          vehicle<%= vehicle.id %>.setIcon(busy);
-        <% end %>
-        
-        var infowindow<%= vehicle.id %> = new google.maps.InfoWindow({
-        content: '<div id="content">'+
-                '<div id="siteNotice">'+
-                '</div><%= image_tag("https://images.unsplash.com/photo-1539713904642-b4d144f769d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", size:"200") %>'+
-                '<h1 id="firstHeading" class="firstHeading"><%= link_to vehicle.name, vehicle_path(vehicle) %></h1>'+
-                '<div id="bodyContent">'+
-                '<p><b>Price：</b><%= vehicle.price %></p>'+
-                '<p><b>Location：</b><%= vehicle.location %></p>'+
-                '</div>'+
-                '</div>'
-        });
-
-        
-        google.maps.event.addListener(vehicle<%= vehicle.id %>, 'click', function() {
-          infowindow<%= vehicle.id %>.open(map, vehicle<%= vehicle.id %>);
-        });
-        
+          vcoordsx = <%= coordinate[0].to_f %>;
+          vcoordsy = <%= coordinate[1].to_f %>;
+          
+          dist = js_dist(userx, usery, vcoordsx, vcoordsy);
+                
+          if (dist <= 3){
+            var vehicle<%= vehicle.id %> = new google.maps.Marker({
+              position: {lat: <%= coordinate.first.to_f %>, lng: <%= coordinate.second.to_f %>},
+              map: map,
+              icon: image
+            });
+            
+            carsArray.push(vehicle<%= vehicle.id %>);
+            
+            <% if vehicle.statu == 0 %>
+              vehicle<%= vehicle.id %>.setIcon(busy);
+            <% end %>
+            
+            var infowindow<%= vehicle.id %> = new google.maps.InfoWindow({
+            content: '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div><%= image_tag("https://images.unsplash.com/photo-1539713904642-b4d144f769d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", size:"200") %>'+
+                    '<h1 id="firstHeading" class="firstHeading"><%= link_to vehicle.name, vehicle_path(vehicle) %></h1>'+
+                    '<div id="bodyContent">'+
+                    '<p><b>Price：</b><%= vehicle.price %></p>'+
+                    '<p><b>Location：</b><%= vehicle.location %></p>'+
+                    '</div>'+
+                    '</div>'
+            });
+    
+            google.maps.event.addListener(vehicle<%= vehicle.id %>, 'click', function() {
+              infowindow<%= vehicle.id %>.open(map, vehicle<%= vehicle.id %>);
+            });
+        }
       <% end %>
    
 //------------------------------------------------------------------------------
+    
+              
+              
+              
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+
+
+      var input = document.getElementById('inputLocation');
+   
       var autocomplete = new google.maps.places.Autocomplete(input);
 
       autocomplete.bindTo('bounds', map);
@@ -96,14 +111,21 @@
       
       var search = document.getElementById('search');
       // autocomplete.addListener('place_changed', 
-      search.onclick = function() {
+      
+      // search.onclick =
+      google.maps.event.addDomListener(search, 'click', function() {
         marker.setVisible(false);
+        
         var place = autocomplete.getPlace();
-        if (!place.geometry) {
-
-          window.alert("The address is invalid: '" + place.name + "'");
-          return;
-        }
+        try{
+          if (!place.geometry) {}
+           clearOverlays();
+          // --------------------------------------------------
+          }catch(err){
+            window.alert("The address is invalid!");
+            autocomplete.set('place',null);
+            return;
+          }
 
         // If the place has a geometry, then present it on a map.
         if (place.geometry.viewport) {
@@ -114,9 +136,61 @@
         }
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
-
+        
+              var image = {
+        url: 'https://icon-library.net/images/auto-icon/auto-icon-6.jpg', 
+        scaledSize: new google.maps.Size(30, 30)
       };
-      // );
+      
+      var busy = {
+        url: 'https://blogmedia.dealerfire.com/wp-content/uploads/sites/767/2017/03/car-red-200_b.png', 
+        scaledSize: new google.maps.Size(30, 30)
+      };  
+        
+        
+        <% Vehicle.all.each do |vehicle| %>
+        <% results = Geocoder.search(vehicle.location) %>
+        <% coordinate = results.first.coordinates %>
+          vcoordsx = <%= coordinate[0].to_f %>;
+          vcoordsy = <%= coordinate[1].to_f %>;
+          console.log(place.geometry.location.lat());
+          dist = js_dist(place.geometry.location.lat(), place.geometry.location.lng(), vcoordsx, vcoordsy);
+                
+          if (dist <= 3){
+            var vehicle<%= vehicle.id %> = new google.maps.Marker({
+              position: {lat: <%= coordinate.first.to_f %>, lng: <%= coordinate.second.to_f %>},
+              map: map,
+              icon: image
+            });
+            
+            carsArray.push(vehicle<%= vehicle.id %>);
+            
+            <% if vehicle.statu == 0 %>
+              vehicle<%= vehicle.id %>.setIcon(busy);
+            <% end %>
+            
+            var infowindow<%= vehicle.id %> = new google.maps.InfoWindow({
+            content: '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div><%= image_tag("https://images.unsplash.com/photo-1539713904642-b4d144f769d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", size:"200") %>'+
+                    '<h1 id="firstHeading" class="firstHeading"><%= link_to vehicle.name, vehicle_path(vehicle) %></h1>'+
+                    '<div id="bodyContent">'+
+                    '<p><b>Price：</b><%= vehicle.price %></p>'+
+                    '<p><b>Location：</b><%= vehicle.location %></p>'+
+                    '</div>'+
+                    '</div>'
+            });
+    
+            google.maps.event.addListener(vehicle<%= vehicle.id %>, 'click', function() {
+              infowindow<%= vehicle.id %>.open(map, vehicle<%= vehicle.id %>);
+            });
+        }
+      <% end %>
+          // -----------------------------------
+           
+        autocomplete.set('place',null);
+      }
+      );
 
     }
     
@@ -127,6 +201,25 @@
                             'Error: Your browser doesn\'t support geolocation.');
       infoWindow.open(map);
     }
+    
+function js_dist(lat1, lng1, lat2, lng2) {
+    var radLat1 = lat1 * Math.PI / 180.0;
+    var radLat2 = lat2 * Math.PI / 180.0;
+    var a = radLat1 - radLat2;
+    var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+    s = s * 6378.137;
+    s = Math.round(s * 10000) / 10000;
+    return s
+};
+
+function clearOverlays() {
+  for (var i = 0; i < carsArray.length; i++ ) {
+    carsArray[i].setMap(null);
+  }
+  carsArray.length = 0;
+}
+
   </script>
 
   <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&libraries=places&callback=initMap" async defer></script>
