@@ -19,7 +19,10 @@
             <div class = "col-sm-10">
               <input id="inputLocation" type="text" placeholder="Search here..." class = "form-control">
             </div>
-            <button id="search" class = "btn btn-outline-primary">Search</button>
+            <div id = "search_address">
+              <%= link_to "Search",index_path, remote: true,class: "btn btn-outline-primary", id:"search" %>
+              <!--<button id="search" class = "btn btn-outline-primary">Search</button>-->
+            </div>
           </div>
         </li>
         <% Vehicle.all.each do |vehicle| %>
