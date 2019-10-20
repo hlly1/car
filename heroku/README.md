@@ -64,7 +64,7 @@ For other issues, [submit a support ticket](https://help.heroku.com/).
 * [`heroku notifications`](docs/notifications.md) - display notifications
 * [`heroku orgs`](docs/orgs.md) - manage organizations
 * [`heroku pg`](docs/pg.md) - manage postgresql databases
-* [`heroku pipelines`](docs/pipelines.md) - groups of apps that share the same codebase
+* [`heroku pipelines`](docs/pipelines.md) - manage pipelines
 * [`heroku plugins`](docs/plugins.md) - list installed plugins
 * [`heroku ps`](docs/ps.md) - Client tools for Heroku Exec
 * [`heroku psql`](docs/psql.md) - open a psql shell to the database
@@ -87,6 +87,13 @@ Developing
 
 This project is built with [lerna](https://lerna.js.org/). The core plugins are located in [./packages](./packages). Run `lerna bootstrap` after cloning the repository to set it up.
 
-To cut a release, simply run `lerna publish` and it will create a CHANGELOG from the pending commits using [Conventional Commits](http://conventionalcommits.org). CircleCI will run the jobs to publish the CLI once it receives the git tag.
+Releasing
+=========
+1. Checkout the master branch and double-check you're on latest commit that you would like to release from.
+2. Ensure your current working directory is clean.
+3. Run `lerna bootstrap` to ensure that all dependencies and are installed and linked.
+4. Make sure you are logged in with the correct user by running: `npm whoami`.
+5. Run `lerna publish`. It will create a CHANGELOG from the pending commits using [Conventional Commits](http://conventionalcommits.org), and also take care of bumping packages, tagging and pushing the commit. Upon the git tag being pushed a series of CI release jobs will start.
+6. Monitor CircleCI, Appveyor and Snapcraft jobs to ensure that all the builds are successful.
 
 Review our [PR guidelines](./.github/PULL_REQUEST_TEMPLATE.md).
