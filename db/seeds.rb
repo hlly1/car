@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
 User.create([
   {name: 'admin', email:'admin@example.com', password:'password', isadmin:1}
 ])
@@ -21,7 +20,7 @@ Vehicle.create(
 ])
 
 Vehicle.create([  {name: 'Nissan', detail: 'This is Nissan.', price:'11.2', location: '20 Wattle Tree Dr, Point Cook VIC 3030' },
-  {name: 'Toyota', detail: 'This is Toyota.', price:'13.2', location: '64 Old Geelong Rd, Hoppers Crossing VIC 3029' },
+  {name: 'Toyota', detail: 'This is Toyota.', price:'13.2', location: '64 Old Geelong Rd, Hoppers Crossing VIC 3029' }
 ])
 
 Location.create(

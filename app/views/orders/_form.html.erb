@@ -18,7 +18,7 @@
 
   
   <%= f.label :From %>
-  <%= f.datetime_select :start, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>
+  <%= f.datetime_select :start, :ampm => true, :minute_step => 5, value: Time.now, class: 'form-control' %><br><br>
 
   <%= f.label :To %>
   <%= f.datetime_select :end, :ampm => true, :minute_step => 5, class: 'form-control' %><br><br>

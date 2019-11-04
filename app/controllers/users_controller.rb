@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-before_action :set_user, only: [:destroy]
+  before_action :set_user, only: [:destroy]
+  
   def edit
     @user = User.find(params[:id])
   end

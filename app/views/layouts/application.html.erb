@@ -10,7 +10,6 @@
     
       
       <!--Adding 'close' to flash notice-->
-      
       <% flash.each do |message_type, message| %>
         <% alert_class = case message_type
                          when :notice then "success"
@@ -18,7 +17,7 @@
                          else message_type
                          end %>
                          
-        <%= content_tag :div, class: "alert alert-#{alert_class}" do %>
+        <%= content_tag :div, class: "alert alert-#{alert_class} alert-danger" do %>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <%= message %>
         <% end %>

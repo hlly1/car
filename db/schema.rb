@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190924091133) do
+ActiveRecord::Schema.define(version: 20191020031837) do
 
   create_table "locations", force: :cascade do |t|
     t.string "address"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20190924091133) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "aasm_state", limit: 100
+    t.integer "return_car", default: 0
     t.index ["location_id"], name: "index_orders_on_location_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["vehicle_id"], name: "index_orders_on_vehicle_id"

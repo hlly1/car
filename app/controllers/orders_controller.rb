@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :login_check, only: [:new, :show]
   before_action :set_vehicle, only: [:new]
-  before_action :set_order, only: [:show, :cancel_order, :pay_order]
+  before_action :set_order, only: [:show, :cancel_order, :pay_order, :return_car]
 
   def index
     #code
@@ -20,11 +20,15 @@ class OrdersController < ApplicationController
   
   def create
     @order = Order.new(order_params)
+    vehicle_id = params[:order][:vehicle_id]
+
     if @order.save
       flash[:success] = "Congratulations, your order is made!"
       @order.update!(aasm_state: "pending")
       @order.vehicle.update!(statu: 0)
       redirect_to @order
+    else
+      redirect_to new_order_path(vehicle_id: vehicle_id), notice: @order.date_validation
     end
   end
   
@@ -38,6 +42,17 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
     end
   end
+  
+  def return_car
+    if @order.location_validation(request.ip)
+      @order.update(return_car: 1)
+      @order.vehicle.update(statu: 1, location: @order.location.address)
+      redirect_to order_path(@order), notice: "Return Successfully: Thanks for using!"
+    else
+      redirect_to order_path(@order), notice: "Return Failed: You are now too far from vehicle return location!"
+    end
+  end
+  
   
   private
 
