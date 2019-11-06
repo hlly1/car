@@ -44,6 +44,7 @@ class OrdersController < ApplicationController
   end
   
   def return_car
+    puts "---------------------#{@order.location_validation(request.ip)}----------------------------"
     if @order.location_validation(request.ip)
       @order.update(return_car: 1)
       @order.vehicle.update(statu: 1, location: @order.location.address)

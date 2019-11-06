@@ -2,9 +2,10 @@ class StaticPagesController < ApplicationController
   # before_action :redirect, only: [:home]
 
   def index
-    # @vehicle_near = []
-    
-    
+    @vehicles = Vehicle.all
+    if params["vehicle_array"].present?
+      render json: {vehicle_array: params["vehicle_array"]}
+    end
   end
   
   def search

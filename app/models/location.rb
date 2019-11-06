@@ -5,7 +5,6 @@ class Location < ApplicationRecord
       rad_per_deg = Math::PI/180
       rkm         = 6371      
       rm          = rkm * 1000
-    
       dlat_rad    = (loc2[0]-loc1[0]) * rad_per_deg 
       dlon_rad    = (loc2[1]-loc1[1]) * rad_per_deg
     

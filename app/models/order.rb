@@ -65,8 +65,12 @@ class Order < ApplicationRecord
   end
   
   def location_validation(ip)
-    if Location.distance(Geocoder.search(ip), Geocoder.search(self.location.address)) > 1
-      errors.add("Return Failed: You are now too far from vehicle return location!")
+    if Location.distance(Geocoder.search(ip).first.coordinates, Geocoder.search(self.location.address).first.coordinates) > 3
+      puts "---------------------#{Geocoder::Calculations.distance_between([-37.8841871,144.7082675],[-37.886659,144.702259])}----------------------"
+      # puts "11111111111---#{Geocoder.search(self.location.address).first.coordinates}---111111111111111"
+      # puts "22222222222---#{Geocoder.search(ip).first.coordinates}---2222222222"
+      
+      return false
     end
   end
 

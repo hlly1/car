@@ -28,6 +28,7 @@
             icon: userIcon,
             animation: google.maps.Animation.DROP
           })
+          console.log(js_dist(-37.8841871,144.7082675,-37.886659,144.702259));
           
           //-----------------------------------------------------------------------------
       var image = {
@@ -50,7 +51,7 @@
           vcoordsy = <%= coordinate[1].to_f %>;
           
           dist = js_dist(userx, usery, vcoordsx, vcoordsy);
-                
+          
           if (dist <= 3){
             var vehicle<%= vehicle.id %> = new google.maps.Marker({
               position: {lat: <%= coordinate.first.to_f %>, lng: <%= coordinate.second.to_f %>},
@@ -147,7 +148,7 @@
         scaledSize: new google.maps.Size(30, 30)
       };  
         
-        
+        var vehicle_array = [];
         <% Vehicle.all.each do |vehicle| %>
         <% results = Geocoder.search(vehicle.location) %>
         <% coordinate = results.first.coordinates %>
@@ -155,7 +156,7 @@
           vcoordsy = <%= coordinate[1].to_f %>;
           console.log(place.geometry.location.lat());
           dist = js_dist(place.geometry.location.lat(), place.geometry.location.lng(), vcoordsx, vcoordsy);
-                
+         
           if (dist <= 3){
             var vehicle<%= vehicle.id %> = new google.maps.Marker({
               position: {lat: <%= coordinate.first.to_f %>, lng: <%= coordinate.second.to_f %>},
@@ -184,10 +185,27 @@
             google.maps.event.addListener(vehicle<%= vehicle.id %>, 'click', function() {
               infowindow<%= vehicle.id %>.open(map, vehicle<%= vehicle.id %>);
             });
+            vehicle_array.push(<%= vehicle.id %>);
         }
       <% end %>
+        
           // -----------------------------------
-           
+        $.ajax({
+          type: 'GET',
+          url: '<%= index_path %>',
+          data: {vehicle_array: vehicle_array},
+          success: function(data){
+            <% Vehicle.all.each do |vehicle| %>
+              $(".car<%= vehicle.id %>").hide();
+            <% end %>
+            data["vehicle_array"].forEach(function(item) {
+              $(".car"+item).show();
+            });
+          },
+          error: function(xhr, type){
+            alert("failed!");
+          }
+        });
         autocomplete.set('place',null);
       }
       );

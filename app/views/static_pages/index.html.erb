@@ -25,8 +25,8 @@
             </div>
           </div>
         </li>
-        <% Vehicle.all.each do |vehicle| %>
-          <li class="list-group-item">
+        <% @vehicles.each do |vehicle| %>
+          <li class="list-group-item car<%= vehicle.id %>">
             
             <div class = "row">
               <div class = "col-sm-2">
@@ -65,4 +65,23 @@
     s = Math.round(s * 10000) / 10000;
     return s
 };
+  var current_location_lat = <%= Geocoder.search(request.ip).first.coordinates[0].to_f %>
+  var current_location_lng = <%= Geocoder.search(request.ip).first.coordinates[1].to_f %>
+  <% Vehicle.all.each do |vehicle| %>
+    <% results = Geocoder.search(vehicle.location) %>
+    <% coordinate = results.first.coordinates %>
+    vcoordsx = <%= coordinate[0].to_f %>;
+    vcoordsy = <%= coordinate[1].to_f %>;
+    
+    current_dist = js_dist(current_location_lat, current_location_lng, vcoordsx, vcoordsy)
+    if(current_dist <= 3){
+      $(".car<%= vehicle.id %>").show();
+    }
+    else{
+      $(".car<%= vehicle.id %>").hide();
+    }
+    
+  <% end %>
+
+  
 </script>

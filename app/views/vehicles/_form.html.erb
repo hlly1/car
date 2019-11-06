@@ -15,5 +15,29 @@
   <%= f.number_field :price, :step => 0.01 ,class: 'form-control' %><br><br>
 
 
-  <%= f.submit yield(:button_text), class: "btn btn-success" %>
+  <%= f.submit yield(:button_text), class: "btn btn-success", :id => 'autocomplete' %>
 <% end %>
+
+<script>
+  function initMap() {
+    document.getElementById("autocomplete").disabled = true;
+    var location = document.getElementById("vehicle_location");
+    var autocomplete = 
+      new google.maps.places.Autocomplete(location);
+    
+    location.addEventListener('input', function(){
+      document.getElementById("autocomplete").disabled = true;
+    });
+    
+    google.maps.event.addListener(autocomplete, 'place_changed', function(){
+        
+      document.getElementById("autocomplete").disabled = false;
+      
+    });
+ 
+  }
+  
+
+  
+</script>
+<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&libraries=places&callback=initMap" async defer></script>

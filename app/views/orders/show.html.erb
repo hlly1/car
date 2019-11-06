@@ -33,6 +33,11 @@
    <li class="list-group-item">USD$ <%= @order.price %></li>
 </ul>
 
+<div class="card-header">Return Location:</div>
+<ul class="list-group list-group-flush">
+   <li class="list-group-item"><%= @order.location.address %></li>
+</ul>
+
 <li class="list-group-item">
 
   <% if @order.aasm_state == "pending" %>
@@ -49,8 +54,8 @@
 <li class="list-group-item">
   
     <% if @order.aasm_state == "completed" %>
-      <%= request.ip %>
-      <%= link_to "return vehicle", return_car_order_path%>
+      <%= Geocoder.search(request.ip).first.coordinates %>
+      <%= link_to "return vehicle", return_car_order_path %>
     <% elsif @order.aasm_state == "pending" %>
         <a href="#" class="btn btn-danger btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">
             You cannot pick/return the car until you finish the payment!
@@ -62,29 +67,29 @@
 </div>
 </div>
 
-<script>
+<!--<script>-->
 
 
 
-var x = document.getElementById("demo");
+<!--var x = document.getElementById("demo");-->
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+<!--function getLocation() {-->
+<!--  if (navigator.geolocation) {-->
+<!--    navigator.geolocation.getCurrentPosition(showPosition);-->
+<!--  } else { -->
+<!--    x.innerHTML = "Geolocation is not supported by this browser.";-->
+<!--  }-->
+<!--}-->
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-
-  
+<!--function showPosition(position) {-->
+<!--  x.innerHTML = "Latitude: " + position.coords.latitude + -->
+<!--  "<br>Longitude: " + position.coords.longitude;-->
+<!--}-->
 
   
-</script>
+
+  
+<!--</script>-->
 
 
 
