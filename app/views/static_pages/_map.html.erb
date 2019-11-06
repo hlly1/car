@@ -1,5 +1,6 @@
   <script>
   var carsArray = [];
+
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -33.8688, lng: 151.2195},
@@ -28,8 +29,25 @@
             icon: userIcon,
             animation: google.maps.Animation.DROP
           })
-          console.log(js_dist(-37.8841871,144.7082675,-37.886659,144.702259));
-          
+          // console.log(js_dist(-37.8841871,144.7082675,-37.886659,144.702259));
+            var current_location_lat = position.coords.latitude;
+            var current_location_lng = position.coords.longitude;
+            <% Vehicle.all.each do |vehicle| %>
+              <% results = Geocoder.search(vehicle.location) %>
+              <% coordinate = results.first.coordinates %>
+              vcoordsx = <%= coordinate[0].to_f %>;
+              vcoordsy = <%= coordinate[1].to_f %>;
+              
+              current_dist = js_dist(current_location_lat, current_location_lng, vcoordsx, vcoordsy)
+              if(current_dist <= 3){
+                $(".car<%= vehicle.id %>").show();
+              }
+              else{
+                $(".car<%= vehicle.id %>").hide();
+              }
+              
+            <% end %>
+  
           //-----------------------------------------------------------------------------
       var image = {
         url: 'https://icon-library.net/images/auto-icon/auto-icon-6.jpg', 
@@ -198,9 +216,13 @@
             <% Vehicle.all.each do |vehicle| %>
               $(".car<%= vehicle.id %>").hide();
             <% end %>
-            data["vehicle_array"].forEach(function(item) {
-              $(".car"+item).show();
-            });
+            if(data["vehicle_array"] != null){
+              data["vehicle_array"].forEach(function(item) {
+                $(".car"+item).show();
+              });
+              
+            }
+            
           },
           error: function(xhr, type){
             alert("failed!");
@@ -219,8 +241,15 @@
                             'Error: Your browser doesn\'t support geolocation.');
       infoWindow.open(map);
     }
-    
-function js_dist(lat1, lng1, lat2, lng2) {
+
+function clearOverlays() {
+  for (var i = 0; i < carsArray.length; i++ ) {
+    carsArray[i].setMap(null);
+  }
+  carsArray.length = 0;
+}
+
+  function js_dist(lat1, lng1, lat2, lng2) {
     var radLat1 = lat1 * Math.PI / 180.0;
     var radLat2 = lat2 * Math.PI / 180.0;
     var a = radLat1 - radLat2;
@@ -231,13 +260,7 @@ function js_dist(lat1, lng1, lat2, lng2) {
     return s
 };
 
-function clearOverlays() {
-  for (var i = 0; i < carsArray.length; i++ ) {
-    carsArray[i].setMap(null);
-  }
-  carsArray.length = 0;
-}
+
 
   </script>
-
-  <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&libraries=places&callback=initMap" async defer></script>
+<script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAmMsed0zPFAgZoiy8oORF6kZTurpIrdg0&libraries=places&callback=initMap" async defer></script>

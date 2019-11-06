@@ -44,13 +44,13 @@ class OrdersController < ApplicationController
   end
   
   def return_car
-    puts "---------------------#{@order.location_validation(request.ip)}----------------------------"
-    if @order.location_validation(request.ip)
-      @order.update(return_car: 1)
-      @order.vehicle.update(statu: 1, location: @order.location.address)
-      redirect_to order_path(@order), notice: "Return Successfully: Thanks for using!"
+    # puts "---------------------#{@order.location_validation(request.ip)}----------------------------"
+    # if @order.location_validation(request.ip)
+    if @order.update!(return_car: 1)
+        @order.vehicle.update(statu: 1, location: @order.location.address)
+        redirect_to order_path(@order), notice: "Return Successfully: Thanks for using!"
     else
-      redirect_to order_path(@order), notice: "Return Failed: You are now too far from vehicle return location!"
+      redirect_to order_path(@order), notice: "Return Failed: 404!"
     end
   end
   

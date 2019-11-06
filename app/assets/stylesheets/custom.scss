@@ -23,7 +23,8 @@ label {
 }
 
 .btn-max-width{
-  width: 300px;
+  // width: 300px;
+  width:100%;
 }
 
 .btn-midSize{
@@ -36,4 +37,12 @@ label {
 
 body{
   background-color: #E9ECEF;
+}
+
+.btn{
+  whitespace: normal;
+}
+
+.btn-sm{
+  margin-right: 20px;
 }

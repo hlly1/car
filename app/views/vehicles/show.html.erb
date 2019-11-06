@@ -40,8 +40,15 @@
       <% if @vehicle.statu == 1 %>
         <%= link_to "Book this vehicle", new_order_path(vehicle_id: @vehicle), class: "btn btn-info btn-max-width" %>
       <% else %>
+        <% order = Order.find_by(vehicle_id: @vehicle.id, return_car:0) %>
+        <p class="card-text"><label>Busy Period:</label>
+        </p>
+        <p>From <%= order.start %> to <%= order.end %></p>
         <a href="#" class="btn btn-danger btn-lg disabled btn-max-width" tabindex="-1" role="button" aria-disabled="true">Busy!</a>
+        
       <% end %>
+        
+
       
       <br><br>
       <% if logged_in? %>

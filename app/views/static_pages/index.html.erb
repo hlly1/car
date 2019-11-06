@@ -32,8 +32,8 @@
               <div class = "col-sm-2">
                 <%= image_tag("https://images.unsplash.com/photo-1523676060187-f55189a71f5e?ixlib=rb-1.2.1&w=1000&q=80", size:"100") %>
               </div>
-              
-              <div class = "col-sm-9">
+              &nbsp&nbsp
+              <div style = "width:100%">
                 <table>
                   <tr><td><label>Name:</label>&nbsp&nbsp<%= link_to vehicle.name, vehicle_path(vehicle) %></td></tr>
                   <tr><td><label>Price:</label>&nbsp&nbspUSD $<%= vehicle.price %>/h</td></tr>
@@ -54,34 +54,3 @@
 
 
 </div>
-<script>
-  function js_dist(lat1, lng1, lat2, lng2) {
-    var radLat1 = lat1 * Math.PI / 180.0;
-    var radLat2 = lat2 * Math.PI / 180.0;
-    var a = radLat1 - radLat2;
-    var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
-    var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
-    s = s * 6378.137;
-    s = Math.round(s * 10000) / 10000;
-    return s
-};
-  var current_location_lat = <%= Geocoder.search(request.ip).first.coordinates[0].to_f %>
-  var current_location_lng = <%= Geocoder.search(request.ip).first.coordinates[1].to_f %>
-  <% Vehicle.all.each do |vehicle| %>
-    <% results = Geocoder.search(vehicle.location) %>
-    <% coordinate = results.first.coordinates %>
-    vcoordsx = <%= coordinate[0].to_f %>;
-    vcoordsy = <%= coordinate[1].to_f %>;
-    
-    current_dist = js_dist(current_location_lat, current_location_lng, vcoordsx, vcoordsy)
-    if(current_dist <= 3){
-      $(".car<%= vehicle.id %>").show();
-    }
-    else{
-      $(".car<%= vehicle.id %>").hide();
-    }
-    
-  <% end %>
-
-  
-</script>

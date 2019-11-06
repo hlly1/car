@@ -5,7 +5,8 @@ class Order < ApplicationRecord
   extend Geocoder::Model::ActiveRecord
   validates :start, :user_id, :vehicle_id, :end, :location_id, presence: true
   after_create :set_price
-  validate :date_validation
+  validate :date_validation, on: :create
+  
   
   def paypal_url(return_path)
     puts "----------development-----------#{Rails.env.development?}------------------------"
@@ -64,14 +65,14 @@ class Order < ApplicationRecord
     end
   end
   
-  def location_validation(ip)
-    if Location.distance(Geocoder.search(ip).first.coordinates, Geocoder.search(self.location.address).first.coordinates) > 3
-      puts "---------------------#{Geocoder::Calculations.distance_between([-37.8841871,144.7082675],[-37.886659,144.702259])}----------------------"
-      # puts "11111111111---#{Geocoder.search(self.location.address).first.coordinates}---111111111111111"
-      # puts "22222222222---#{Geocoder.search(ip).first.coordinates}---2222222222"
+  # def location_validation(ip)
+  #   if Location.distance(Geocoder.search(ip).first.coordinates, Geocoder.search(self.location.address).first.coordinates) > 1
+  #     puts "---------------------#{Geocoder::Calculations.distance_between([-37.8841871,144.7082675],[-37.886659,144.702259])}----------------------"
+  #     # puts "11111111111---#{Geocoder.search(self.location.address).first.coordinates}---111111111111111"
+  #     # puts "22222222222---#{Geocoder.search(ip).first.coordinates}---2222222222"
       
-      return false
-    end
-  end
+  #     return false
+  #   end
+  # end
 
 end

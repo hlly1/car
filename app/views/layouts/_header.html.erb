@@ -1,30 +1,34 @@
-<header>
+<header class="navbar navbar-light bg-info">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
   <div class = "container">
-  <%= link_to "MOCAR", root_path, id: "logo" %>
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav navbar-right">
-      <li>
+    
+    
+    
+    
+      <%= link_to "MOCAR", root_path, id: "logo" %>
+      
+      <div style = "float:right">
         <%= link_to "Home", root_path, :class => "btn btn-success btn-sm" %>
-      </li>
-      <% if logged_in? %>
-      &nbsp&nbsp&nbsp&nbsp&nbsp
+        <% if logged_in? %>
       <%= link_to current_user.name, user_url(current_user.id), :class => "btn btn-success btn-sm" %>
-      &nbsp&nbsp&nbsp&nbsp&nbsp
+     
       <%= link_to "Logout", logout_path, :method => :delete ,:class => "btn btn-success btn-sm" %>
       <% else %>
-      <li>
-        &nbsp&nbsp&nbsp&nbsp&nbsp
+     
+        
         <%= link_to "Login", login_path, :class => "btn btn-success btn-sm" %>
-        &nbsp&nbsp&nbsp&nbsp&nbsp
+        
         <%= link_to "Signup", signup_path, :class => "btn btn-success btn-sm" %>
-      </li>
+      
       <% end %>
-    </ul>
+      </div>
+      
+    </div>
+    
+    
   </div>
-  </div>
-</nav>
+
+
   
   
   
