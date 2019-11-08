@@ -91,7 +91,7 @@ function initMap() {
           var distance = js_dist(position.coords.latitude, position.coords.longitude, return_location[0], return_location[1]);
           
           console.log(distance);
-          if (distance <= 1){
+          if (distance <= 2){
             //document.getElementById("returnCar").disabled = false;
             $("#returnCar").show();
             $("#return_info").hide();
