@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :orders
+  has_many :orders, dependent: :destroy
   before_save {self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 10 }
   
