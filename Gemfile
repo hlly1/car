@@ -18,6 +18,7 @@ gem 'font-awesome-rails'
 gem 'gon'
 gem 'geocoder', '~> 1.4', '>= 1.4.9'
 gem 'gis-distance', '~> 1.0', '>= 1.0.2'
+gem 'ruby-graphviz'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
@@ -29,6 +30,7 @@ group :development do
   gem 'listen',                '3.0.8'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+  gem "rails-erd"
 end
 
 group :test do
